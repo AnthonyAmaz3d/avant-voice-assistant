@@ -12,7 +12,9 @@ Este projeto é um assistente de comandos de voz desenvolvido em Python, capaz d
   - "Adicione uma tarefa"
   - "Liste as tarefas"
   - "Tire um print"
-  - "Abra o navegador"
+  - "Youtube"
+  - "World of Warcraft"
+  - "Steam"
   - "Sair"
 
 <h2 align="center" > Instalação ⏳</h2>
