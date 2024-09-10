@@ -1,8 +1,8 @@
-# Speech Command Assistant
+<h1 align="center" > Speech Command Assistant 🔊 </h1>
 
 Este projeto é um assistente de comandos de voz desenvolvido em Python, capaz de ouvir comandos, responder por meio de síntese de fala, automatizar algumas tarefas e gerenciar uma lista de tarefas usando um banco de dados SQLite.
 
-## Funcionalidades
+<h2> Funcionalidades 🧰</h2>
 
 - **Reconhecimento de fala:** O assistente escuta e reconhece comandos de voz em português (pt-BR).
 - **Síntese de fala:** O assistente responde aos comandos com áudio gerado.
@@ -15,7 +15,7 @@ Este projeto é um assistente de comandos de voz desenvolvido em Python, capaz d
   - "Abra o navegador"
   - "Sair"
 
-## Instalação
+<h2> Instalação ⏳</h2>
 
 1. Clone o repositório para sua máquina local:
    
@@ -27,7 +27,7 @@ Este projeto é um assistente de comandos de voz desenvolvido em Python, capaz d
    ```bash
    pip install -r requirements.txt
    
-## Dependências
+<h2> Dependências 📦</h2>
 
   - speech_recognition
   - gTTS
@@ -37,24 +37,24 @@ Este projeto é um assistente de comandos de voz desenvolvido em Python, capaz d
   - webbrowser
   - sqlite3
 
-## Como usar
+<h2> Como usar 📖</h2>
 
   1. Execute o script principal:
      ```bash
      python main.py
   2. O assistente começará a escutar os comandos de voz. Siga as instruções faladas para interagir.
 
-## Banco de Dados
+<h2> Banco de Dados 📂</h2>
 
   - O banco de dados SQLite tasks.db é criado automaticamente ao iniciar o programa, armazenando suas tarefas em uma tabela chamada tasks.
 
-## Exemplo de uso
+<h2> Exemplo de uso 🔍</h2>
 
   - Adicionar uma tarefa: Diga "Adicione uma tarefa" e, em seguida, informe a tarefa que deseja adicionar.
   - Listar tarefas: Diga "Liste as tarefas" para exibir todas as tarefas armazenadas.
   - Tirar um print: Diga "Tire um print" para o assistente capturar uma captura de tela.
   - Abrir o navegador: Diga "Abra o navegador" para abrir o navegador na página do YouTube.
     
-## Contribuição
+<h2> Contribuição 🤝 </h2>
 
 Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests.
