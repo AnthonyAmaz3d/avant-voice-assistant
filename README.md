@@ -29,13 +29,13 @@ Este projeto é um assistente de comandos de voz desenvolvido em Python, capaz d
    
 ## Dependências
 
-  -speech_recognition
-  -gTTS
-  -winsound
-  -pydub
-  -pyautogui
-  -webbrowser
-  -sqlite3
+  - speech_recognition
+  - gTTS
+  - winsound
+  - pydub
+  - pyautogui
+  - webbrowser
+  - sqlite3
 
 ## Como usar
 
