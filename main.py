@@ -4,6 +4,10 @@ import winsound
 from pydub import AudioSegment
 import pyautogui
 import webbrowser
+import sqlite3
+
+connection = sqlite3.connect("tasks.db")
+cursor = connection.cursor()
 
 def listen_for_command():
     recognizer = sr.Recognizer()
@@ -38,21 +42,31 @@ def main():
     global tasks
     global listeningToTask
     respond("iniciando...")
+    
+    cursor.execute("CREATE TABLE IF NOT EXISTS tasks (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)")
+    
     while True:
         command = listen_for_command()
         
         if command:
             if listeningToTask:
-                tasks.append(command)
+                db = "INSERT INTO tasks (name) VALUES (?)"
+                args = (command,)
+                cursor.execute(db, args)
+                connection.commit()
                 listeningToTask = False
-                respond("Adicionando " + command + " para sua lista de tarefas. Você tem " + str(len(tasks)) + " tarefa atualmente na sua lista")
+                cursor.execute("SELECT COUNT(*) FROM tasks")
+                task_count = cursor.fetchone()[0]
+                respond("Adicionando " + command + " para sua lista de tarefas. Você tem "+ str(task_count) + " tarefa atualmente na sua lista")
             elif "adicione uma tarefa" in command:
                 listeningToTask = True
                 respond("Claro, qual tarefa? ")
             elif "liste as tarefas" in command:
                 respond("Claro, suas tarefas são: ")
-                for task in tasks:
-                    respond(task)
+                cursor.execute("SELECT * FROM tasks")
+                rows = cursor.fetchall()
+                for row in rows:
+                    print(row)
             elif "tire um print" in command:
                 pyautogui.screenshot("print.png")
                 respond("Eu tirei um print para você")
@@ -67,3 +81,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    connection.close()
