@@ -5,9 +5,16 @@ from pydub import AudioSegment
 import pyautogui
 import webbrowser
 import sqlite3
+import os
 
 connection = sqlite3.connect("tasks.db")
 cursor = connection.cursor()
+
+def open_steam():
+    os.startfile("C:/Program Files (x86)/Steam/steam.exe")
+
+def open_wow():
+    os.startfile("C:/Program Files (x86)/World of Warcraft/World of Warcraft Launcher.exe")
 
 def listen_for_command():
     recognizer = sr.Recognizer()
@@ -35,7 +42,6 @@ def respond(response_text):
     sound.export("response.wav", format="wav")
     winsound.PlaySound("response.wav", winsound.SND_FILENAME)
 
-tasks = []
 listeningToTask = False
 
 def main():
@@ -70,9 +76,15 @@ def main():
             elif "tire um print" in command:
                 pyautogui.screenshot("print.png")
                 respond("Eu tirei um print para você")
-            elif "Abra o navegador" in command:
-                respond("Abrindo o firefox")
+            elif "youtube" in command:
+                respond("Abrindo o youtube")
                 webbrowser.open("https://www.youtube.com")
+            elif "steam" in command:
+                respond("Abrindo a steam")
+                open_steam()
+            elif "world of warcraft" in command:
+                respond("Abrindo o wow")
+                open_wow()
             elif "sair" in command:
                 respond("Adeus chefe")
                 break
