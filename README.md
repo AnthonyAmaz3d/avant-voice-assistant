@@ -55,7 +55,7 @@ Este projeto é um assistente de comandos de voz desenvolvido em Python, capaz d
   - Adicionar uma tarefa: Diga "Adicione uma tarefa" e, em seguida, informe a tarefa que deseja adicionar.
   - Listar tarefas: Diga "Liste as tarefas" para exibir todas as tarefas armazenadas.
   - Tirar um print: Diga "Tire um print" para o assistente capturar uma captura de tela.
-  - Abrir o navegador: Diga "Abra o navegador" para abrir o navegador na página do YouTube.
+  - Abrir o navegador: Diga "YouTube" para abrir o navegador na página do YouTube.
     
 <h2 align="center" > Contribuição 🤝 </h2>
 
