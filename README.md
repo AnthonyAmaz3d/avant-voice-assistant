@@ -1,4 +1,4 @@
-<h1 align="center" > Speech Command Assistant 🔊 </h1>
+<h1 align="center" > Devant voice Assistant 🔊 </h1>
 
 Este projeto é um assistente de comandos de voz desenvolvido em Python, capaz de ouvir comandos, responder por meio de síntese de fala, automatizar algumas tarefas e gerenciar uma lista de tarefas usando um banco de dados SQLite.
 
