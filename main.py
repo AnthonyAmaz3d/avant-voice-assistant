@@ -9,7 +9,7 @@ import os
 from groq import Groq
 
 client = Groq(
-    api_key='sua api'
+    api_key=''
 )
 
 def start_devant(a):
@@ -94,8 +94,12 @@ def main():
                 pyautogui.screenshot("print.png")
                 respond("Eu tirei um print para você")
             elif "pergunta" in command:
-                a = listen_for_command()
-                start_devant(a)
+                while True:
+                    command = listen_for_command()
+                    if command == "sair":
+                        print("Encerrando o chat de perguntas. \n")
+                        break
+                    start_devant(command)
             elif "youtube" in command:
                 respond("Abrindo o youtube")
                 webbrowser.open("https://www.youtube.com")
