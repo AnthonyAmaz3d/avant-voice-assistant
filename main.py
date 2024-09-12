@@ -6,6 +6,23 @@ import pyautogui
 import webbrowser
 import sqlite3
 import os
+from groq import Groq
+
+client = Groq(
+    api_key='sua api'
+)
+
+def start_devant(a):
+    chat_completion = client.chat.completions.create(
+        messages=[
+            {
+                "role":"user",
+                "content": a 
+            }
+        ],
+        model="llama3-8b-8192",
+    )
+    print(chat_completion.choices[0].message.content + "\n")
 
 connection = sqlite3.connect("tasks.db")
 cursor = connection.cursor()
@@ -20,12 +37,12 @@ def listen_for_command():
     recognizer = sr.Recognizer()
     
     with sr.Microphone() as source:
-        print("Escutando os comandos....")
+        print("Escutando os comandos.... \n")
         recognizer.adjust_for_ambient_noise(source)
         audio = recognizer.listen(source)
     try:
         command = recognizer.recognize_google(audio, language="pt-BR")
-        print("Você disse: ", command)
+        print("Você disse: ", command + "\n")
         return command.lower()
     except sr.UnknownValueError:
         print("Não consegui entender o audio. Tente novamente.")
@@ -47,7 +64,7 @@ listeningToTask = False
 def main():
     global tasks
     global listeningToTask
-    respond("iniciando...")
+    respond("iniciando... \n")
     
     cursor.execute("CREATE TABLE IF NOT EXISTS tasks (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)")
     
@@ -76,6 +93,9 @@ def main():
             elif "tire um print" in command:
                 pyautogui.screenshot("print.png")
                 respond("Eu tirei um print para você")
+            elif "pergunta" in command:
+                a = listen_for_command()
+                start_devant(a)
             elif "youtube" in command:
                 respond("Abrindo o youtube")
                 webbrowser.open("https://www.youtube.com")
@@ -89,7 +109,7 @@ def main():
                 respond("Adeus chefe")
                 break
             else:
-                respond("Desculpe, eu não entendi o comando")
+                respond("Desculpe, eu não entendi o comando \n")
 
 if __name__ == "__main__":
     main()
