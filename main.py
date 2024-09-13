@@ -4,10 +4,11 @@ import pyautogui
 import webbrowser
 import sqlite3
 import os
+from key import API_KEY
 from groq import Groq
 
 client = Groq(
-    api_key=''
+    api_key=API_KEY
 )
 
 connection = sqlite3.connect("tasks.db")
