@@ -1,7 +1,6 @@
 import speech_recognition as sr
 import pyttsx3
 import pyautogui
-import subprocess
 import webbrowser
 import sqlite3
 import os
@@ -55,6 +54,16 @@ def listen_for_command():
     except sr.RequestError:
         print("Erro no requerimento, tente novamente. ")
         return None
+
+def open_spotify_and_play_song(song):
+    os.startfile("C:/Users/antho/AppData/Roaming/Spotify/Spotify.exe")
+    
+    query = song.replace(" ", "20%")
+    url = f"spotify:search:{query}"
+    webbrowser.open(url)
+    
+    pyautogui.press('space')
+    respond(f"Tocando a música '{song} no Spotify")
 
 def respond(response_text, rate = 250):
     engine = pyttsx3.init()
@@ -110,6 +119,9 @@ def main():
             elif "steam" in command:
                 respond("Abrindo a steam")
                 open_steam()
+            elif "tocar música" in command: 
+                song = command.split("tocar música")[1].strip()
+                open_spotify_and_play_song(song)
             elif "world of warcraft" in command:
                 respond("Abrindo o wow")
                 open_wow()
