@@ -22,15 +22,31 @@ conversation_history = [
 ]
 
 def start_devant_with_history(a):
+    if not a:
+        print("Comando vazio ou inválido. Por favor, tente novamente.")
+        return
+    
     conversation_history.append({"role":"user","content": a})
     
-    chat_completion = client.chat.completions.create(
-        messages= conversation_history,
-        model="llama3-8b-8192",
-    )
-    response = chat_completion.choices[0].message.content
-    conversation_history.append({"role": "assistant", "content": response})
-    print(response + "\n")
+    for _ in range(3):
+        try:
+            chat_completion = client.chat.completions.create(
+                messages=conversation_history,
+                model="llama3-8b-8192",
+            )
+            response = chat_completion.choices[0].message.content
+            conversation_history.append({"role": "assistant", "content": response})
+            print(response + "\n")
+            return 
+        except Exception as e:
+            print(f"Ocorreu um erro: {str(e)}")
+            print("Ocorreu um erro ao tentar entender o áudio ou processar o comando. Pergunte novamente.\n")
+            a = listen_for_command()
+            if a is None:
+                print("Não foi possível entender o novo comando. Encerrando tentativa.")
+                break
+            else:
+                conversation_history.append({"role": "user", "content": a})
 
 def open_steam():
     os.startfile("C:/Program Files (x86)/Steam/steam.exe")
