@@ -1,8 +1,7 @@
 import speech_recognition as sr
-from gtts import gTTS
-import winsound
-from pydub import AudioSegment
+import pyttsx3
 import pyautogui
+import subprocess
 import webbrowser
 import sqlite3
 import os
@@ -12,20 +11,26 @@ client = Groq(
     api_key=''
 )
 
-def start_devant(a):
-    chat_completion = client.chat.completions.create(
-        messages=[
-            {
-                "role":"user",
-                "content": a 
-            }
-        ],
-        model="llama3-8b-8192",
-    )
-    print(chat_completion.choices[0].message.content + "\n")
-
 connection = sqlite3.connect("tasks.db")
 cursor = connection.cursor()
+
+conversation_history = [
+    {
+        "role": "system",
+        "content": "Você é uma assistente pessoal gentil, amigavel, util e inteligente."
+    }
+]
+
+def start_devant_with_history(a):
+    conversation_history.append({"role":"user","content": a})
+    
+    chat_completion = client.chat.completions.create(
+        messages= conversation_history,
+        model="llama3-8b-8192",
+    )
+    response = chat_completion.choices[0].message.content
+    conversation_history.append({"role": "assistant", "content": response})
+    print(response + "\n")
 
 def open_steam():
     os.startfile("C:/Program Files (x86)/Steam/steam.exe")
@@ -51,18 +56,17 @@ def listen_for_command():
         print("Erro no requerimento, tente novamente. ")
         return None
 
-def respond(response_text):
+def respond(response_text, rate = 250):
+    engine = pyttsx3.init()
+    
+    engine.setProperty('rate', rate)
     print(response_text)
-    tts = gTTS(text=response_text, lang='pt-BR')
-    tts.save("response.mp3")
-    sound = AudioSegment.from_mp3("response.mp3")
-    sound.export("response.wav", format="wav")
-    winsound.PlaySound("response.wav", winsound.SND_FILENAME)
+    engine.say(response_text)
+    engine.runAndWait()
 
 listeningToTask = False
 
 def main():
-    global tasks
     global listeningToTask
     respond("iniciando... \n")
     
@@ -99,7 +103,7 @@ def main():
                     if command == "sair":
                         print("Encerrando o chat de perguntas. \n")
                         break
-                    start_devant(command)
+                    start_devant_with_history(command)
             elif "youtube" in command:
                 respond("Abrindo o youtube")
                 webbrowser.open("https://www.youtube.com")

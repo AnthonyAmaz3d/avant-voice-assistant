@@ -34,8 +34,7 @@ Este projeto é um assistente de comandos de voz desenvolvido em Python, capaz d
 <h2 align="center" > Dependências 📦</h2>
 
   - speech_recognition
-  - gTTS
-  - winsound
+  - pyttsx3
   - pydub
   - pyautogui
   - webbrowser
