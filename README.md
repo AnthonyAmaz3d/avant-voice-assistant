@@ -17,6 +17,7 @@ Este projeto é um assistente de comandos de voz desenvolvido em Python, capaz d
   - "Youtube"
   - "World of Warcraft"
   - "Steam"
+  - "Tocar música" + nome da música
   - "Sair"
 
 <h2 align="center" > Instalação ⏳</h2>
@@ -35,10 +36,10 @@ Este projeto é um assistente de comandos de voz desenvolvido em Python, capaz d
 
   - speech_recognition
   - pyttsx3
-  - pydub
   - pyautogui
   - webbrowser
   - sqlite3
+  - os
   - Groq
 
 <h2 align="center" > Como usar 📖</h2>
