@@ -4,6 +4,7 @@ import pyautogui
 import webbrowser
 import sqlite3
 import os
+import platform
 from key import API_KEY
 from groq import Groq
 
@@ -72,15 +73,53 @@ def listen_for_command():
         print("Erro no requerimento, tente novamente. ")
         return None
 
+def open_spotify(spotify_path):
+    current_system = platform.system()
+    
+    if current_system == 'Windows':
+        try:
+            os.startfile(spotify_path)
+        except Exception as e:
+            print(f"Erro ao abrir o spotify: {e}")
+    
+    elif current_system == 'Darwin':
+        try:
+            os.system(f'Open {spotify_path}')
+        except Exception as e:
+            print(f"Erro ao abrir o spotify: {e}")
+    
+    elif current_system == 'Linux':
+        try:
+            os.system(f"xdg-open {spotify_path}")
+        except Exception as e:
+            print(f"Erro ao abrir o spotify: {e}")
+    
+    else: 
+        print(f"Sistema operacional '{current_system}' não suportado ou não identificado.")
+
 def open_spotify_and_play_song(song):
-    os.startfile("C:/Users/antho/AppData/Roaming/Spotify/Spotify.exe")
+    spotify_path = None
     
-    query = song.replace(" ", "20%")
-    url = f"spotify:search:{query}"
-    webbrowser.open(url)
+    possible_path = [
+        os.path.expandvars(r"%APPDATA%/Spotify/Spotify.exe"),
+        "/usr/bin/spotify",
+        "/Applications/Spotify.app"
+    ]
     
-    pyautogui.press('space')
-    respond(f"Tocando a música '{song} no Spotify")
+    for path in possible_path:
+        if os.path.exists(path):
+            spotify_path = path
+            break
+    
+    if spotify_path:
+        open_spotify(spotify_path)
+        query = song.replace(" ", "20%")
+        url = f"spotify:search:{query}"
+        webbrowser.open(url)
+        pyautogui.press('space')
+        respond(f"Tocando a música '{song} no Spotify")
+    else:
+        print("Spotify não encontrado no sistema")
 
 def respond(response_text, rate = 250):
     engine = pyttsx3.init()
