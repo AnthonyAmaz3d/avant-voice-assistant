@@ -6,7 +6,7 @@ Este projeto é um assistente de comandos de voz desenvolvido em Python, capaz d
 
 - **Reconhecimento de fala:** O assistente escuta e reconhece comandos de voz em português (pt-BR).
 - **Síntese de fala:** O assistente responde aos comandos com áudio gerado.
-- **Pergunte para a IA:** Nova funcionalidade de pergunta e resposta com base na IA llama3 com o Groq
+- **Pergunte para a IA:** Nova funcionalidade de pergunta e resposta com base na llama3 (IA) com o Groq
 - **Gerenciamento de tarefas:** É possível adicionar tarefas a uma lista que é armazenada em um banco de dados SQLite.
 - **Automação de tarefas:** O assistente pode tirar screenshots e abrir o navegador para sites específicos.
 - **Comandos de voz suportados:**
